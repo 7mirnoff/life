@@ -1,10 +1,11 @@
 /* ========================== regenerator-runtime for async await ========================== */
-// import 'regenerator-runtime/runtime'
-import 'core-js/stable'
+import 'regenerator-runtime/runtime'
+// import 'core-js/stable'
 
 // import 'core-js/features/array/from'
 // import 'core-js/features/set'
 // import 'core-js/features/promise'
+
 // import objectFitImages from 'object-fit-images'
 
 /* ========================== NODELIST IE11 ========================== */
