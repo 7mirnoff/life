@@ -9,18 +9,15 @@ export default class Game {
 
     this.textures = null
     this.spritsheets = null
-
-    this.init()
   }
 
-  init() {
-    window.addEventListener('load', async () => {
-      this.pixi = initPixi()
+  async init() {
+    this.pixi = initPixi()
 
-      await loadTextures()
-      this.textures = textures
-      this.spritsheets = spritsheets
-    })
+    await loadTextures()
+
+    this.textures = textures
+    this.spritsheets = spritsheets
   }
 
   start() {
@@ -31,6 +28,6 @@ export default class Game {
   }
 
   update() {
-
+    console.log(1);
   }
 }
