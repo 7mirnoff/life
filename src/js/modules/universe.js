@@ -1,7 +1,7 @@
 import Cell from './cell'
 
-const AMT_HORIZ = 100
-const AMT_VERT = 100
+const AMT_HORIZ = 10
+const AMT_VERT = 10
 
 export default class Universe {
   constructor(renderer) {
@@ -19,7 +19,7 @@ export default class Universe {
     for (let i = 0; i < this.amtVert; i++) {
       array[i] = []
       for (let j = 0; j < this.amtHoriz; j++) {
-        array[i][j] = new Cell(j * 4, i * 4, 4, 4)
+        array[i][j] = new Cell(j * this.cellWidth, i * this.cellHeigt, this.cellWidth, this.cellHeigt)
       }
     }
 
