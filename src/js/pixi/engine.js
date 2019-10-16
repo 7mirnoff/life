@@ -12,7 +12,7 @@ const initPixi = () => {
   })
 
   app.renderer.autoResize = true
-  app.renderer.resize(1280, 720)
+  app.renderer.resize(1200, 800)
   app.renderer.backgroundColor = 0x00BFFF
   app.renderer.view.classList.add('main-canvas')
 

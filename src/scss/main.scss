@@ -3,5 +3,7 @@
 @import "mixins";
 @import "scaffolding";
 
-
-
+.game {
+  display: flex;
+  justify-content: center;
+}

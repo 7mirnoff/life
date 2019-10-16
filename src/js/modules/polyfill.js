@@ -4,7 +4,7 @@ import 'regenerator-runtime/runtime'
 
 // import 'core-js/features/array/from'
 // import 'core-js/features/set'
-// import 'core-js/features/promise'
+import 'core-js/features/promise'
 
 // import objectFitImages from 'object-fit-images'
 
