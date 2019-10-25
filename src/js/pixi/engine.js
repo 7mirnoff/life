@@ -17,7 +17,7 @@ const initPixi = () => {
   app.renderer.view.classList.add('main-canvas')
 
   const container = document.querySelector('.game')
-  container.appendChild(app.view)
+  // container.appendChild(app.view)
 
   return app
 }

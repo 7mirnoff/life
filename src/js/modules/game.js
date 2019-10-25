@@ -7,7 +7,9 @@ import Universe from './universe'
 
 export default class Game {
   constructor() {
-    this.pixi = initPixi()
+    // this.pixi = initPixi()
+    this.canvas = document.getElementById('canvas')
+    this.ctx = this.canvas.getContext('2d')
     this.textures = null
     this.spritsheets = null
 
@@ -19,7 +21,11 @@ export default class Game {
     this.stop = this.stop.bind(this)
     this.update = this.update.bind(this)
 
-    this.universe = new Universe(this.pixi.renderer)
+    this.initCanvas()
+
+    this.universe = new Universe(this.canvas)
+
+    this.initClick()
   }
 
   async initTexture() {
@@ -31,6 +37,7 @@ export default class Game {
   play() {
     this.isPlay = true
     this.renderUniverse()
+    console.log(this.universe);
   }
 
   pause() {
@@ -39,8 +46,7 @@ export default class Game {
 
   stop() {
     this.isPlay = false
-    console.log(this.pixi);
-    this.pixi.stage.chigraphics.clear()
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
   }
 
   initControls() {
@@ -49,28 +55,56 @@ export default class Game {
     this.buttons.stop.addEventListener('click', this.stop)
   }
 
-  renderUniverse() { //TODO: остановился тут
-    const rect = new PIXI.Rectangle(10, 10, 10, 10)
+  initCanvas() {
+    this.canvas.width = this.canvas.offsetWidth
+    this.canvas.height = this.canvas.offsetHeight
+  }
 
-    let graphics = new PIXI.Graphics();
-    graphics.beginFill(0xFFFFFF);
-    graphics.lineStyle(2, 0x000000);
+  renderUniverse() { //TODO: остановился тут
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+    this.ctx.lineWidth = '2'
+    this.ctx.strokeStyle = 'black'
+    this.ctx.fillStyle = 'red'
+
+    this.ctx.beginPath()
 
     this.universe.board.forEach((row, i) => {
       row.forEach((cell, j) => {
-        graphics.drawRect(cell.figure.x, cell.figure.y, cell.figure.width, cell.figure.height);
-        this.pixi.stage.addChild(graphics);
+        this.ctx.rect(cell.figure.x, cell.figure.y, this.universe.cellWidth, this.universe.cellHeigt)
+
+        if (cell.on) {
+          this.ctx.fillRect(cell.figure.x, cell.figure.y, this.universe.cellWidth, this.universe.cellHeigt)
+        }
       })
+    })
+
+    this.ctx.stroke()
+  }
+
+  initClick() {
+    this.canvas.addEventListener('click', (evt) => {
+      const ceilX = Math.floor(evt.layerX / this.universe.cellWidth)
+      const ceilY = Math.floor(evt.layerY / this.universe.cellHeigt)
+      const currentCeil = this.universe.board[ceilY][ceilX]
+
+      if (currentCeil.on) {
+        currentCeil.on = false
+      } else {
+        currentCeil.on = true
+      }
+
     })
   }
 
   start() {
-    this.pixi.ticker.add(this.update)
+    window.requestAnimationFrame(this.update)
   }
 
   update() {
     if (this.isPlay) {
-
+      this.renderUniverse()
     }
+    window.requestAnimationFrame(this.update)
   }
 }

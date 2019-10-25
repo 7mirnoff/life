@@ -1,12 +1,12 @@
 import Cell from './cell'
 
-const AMT_HORIZ = 10
-const AMT_VERT = 10
+const AMT_HORIZ = 128
+const AMT_VERT = 72
 
 export default class Universe {
-  constructor(renderer) {
-    this.rendererWidth = renderer.width
-    this.rendererHeight = renderer.height
+  constructor(canvas) {
+    this.rendererWidth = canvas.width
+    this.rendererHeight = canvas.height
     this.amtHoriz = AMT_HORIZ
     this.amtVert = AMT_VERT
     this.cellWidth = this.rendererWidth / this.amtHoriz
@@ -19,10 +19,9 @@ export default class Universe {
     for (let i = 0; i < this.amtVert; i++) {
       array[i] = []
       for (let j = 0; j < this.amtHoriz; j++) {
-        array[i][j] = new Cell(j * this.cellWidth, i * this.cellHeigt, this.cellWidth, this.cellHeigt)
+        array[i][j] = new Cell(j * this.cellWidth, i * this.cellHeigt)
       }
     }
-
     return array
   }
 }
