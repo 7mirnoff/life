@@ -1,6 +1,12 @@
 import * as PIXI from 'pixi.js'
-import { initPixi } from '../pixi/engine'
-import { loadTextures, spritsheets, textures } from '../pixi/textures';
+import {
+  initPixi
+} from '../pixi/engine'
+import {
+  loadTextures,
+  spritsheets,
+  textures
+} from '../pixi/textures';
 
 import getControlButtons from './buttons'
 import Universe from './universe'
@@ -36,8 +42,6 @@ export default class Game {
 
   play() {
     this.isPlay = true
-    this.renderUniverse()
-    console.log(this.universe);
   }
 
   pause() {
@@ -65,7 +69,6 @@ export default class Game {
 
     this.ctx.lineWidth = '2'
     this.ctx.strokeStyle = 'black'
-    this.ctx.fillStyle = 'red'
 
     this.ctx.beginPath()
 
@@ -76,35 +79,189 @@ export default class Game {
         if (cell.on) {
           this.ctx.fillRect(cell.figure.x, cell.figure.y, this.universe.cellWidth, this.universe.cellHeigt)
         }
+
+        if (this.isPlay) {
+
+        if (cell.on) {
+          let countOnBy = 0
+
+          if (this.universe.board[i + 1]) {
+            this.universe.board[i + 1][j].on ? countOnBy++ : null
+          }
+
+          if (this.universe.board[i - 1]) {
+            this.universe.board[i - 1][j].on ? countOnBy++ : null
+          }
+
+          if (this.universe.board[i][j + 1]) {
+            this.universe.board[i][j + 1].on ? countOnBy++ : null
+          }
+
+          if (this.universe.board[i][j - 1]) {
+            this.universe.board[i][j - 1].on ? countOnBy++ : null
+          }
+
+
+
+
+
+          if (this.universe.board[i - 1]) {
+            if (this.universe.board[i - 1][j - 1]) {
+              this.universe.board[i - 1][j - 1].on ? countOnBy++ : null
+            }
+
+            if (this.universe.board[i - 1][j + 1]) {
+              this.universe.board[i - 1][j + 1].on ? countOnBy++ : null
+            }
+
+          }
+
+          if (this.universe.board[i + 1]) {
+            if (this.universe.board[i + 1][j - 1]) {
+              this.universe.board[i + 1][j - 1].on ? countOnBy++ : null
+            }
+
+            if (this.universe.board[i + 1][j + 1]) {
+              this.universe.board[i + 1][j + 1].on ? countOnBy++ : null
+            }
+          }
+
+          // if ((countOnBy === 2)) {
+          //   this.ctx.fillStyle = 'red'
+          // }
+
+          // if ((countOnBy === 3)) {
+          //   this.ctx.fillStyle = 'yellow'
+          // }
+
+          // if ((countOnBy === 4)) {
+          //   this.ctx.fillStyle = 'blue'
+          // }
+
+          // if ((countOnBy === 5)) {
+          //   this.ctx.fillStyle = 'green'
+          // }
+
+
+
+          // if ((countOnBy === 2) || (countOnBy === 3) || (countOnBy === 4) && (Math.sin(performance.now() / 1000) > 0.2)) {
+          if ((countOnBy === 2) || (countOnBy === 3)) {
+            cell.onNext = true
+          } else {
+            cell.onNext = false
+          }
+        }
+
+
+        if (!cell.on) {
+          let countOnBy = 0
+
+          if (this.universe.board[i + 1]) {
+            this.universe.board[i + 1][j].on ? countOnBy++ : null
+          }
+
+          if (this.universe.board[i - 1]) {
+            this.universe.board[i - 1][j].on ? countOnBy++ : null
+          }
+
+          if (this.universe.board[i][j + 1]) {
+            this.universe.board[i][j + 1].on ? countOnBy++ : null
+          }
+
+          if (this.universe.board[i][j - 1]) {
+            this.universe.board[i][j - 1].on ? countOnBy++ : null
+          }
+
+
+          if (this.universe.board[i - 1]) {
+            if (this.universe.board[i - 1][j - 1]) {
+              this.universe.board[i - 1][j - 1].on ? countOnBy++ : null
+            }
+
+            if (this.universe.board[i - 1][j + 1]) {
+              this.universe.board[i - 1][j + 1].on ? countOnBy++ : null
+            }
+
+          }
+
+          if (this.universe.board[i + 1]) {
+            if (this.universe.board[i + 1][j - 1]) {
+              this.universe.board[i + 1][j - 1].on ? countOnBy++ : null
+            }
+
+            if (this.universe.board[i + 1][j + 1]) {
+              this.universe.board[i + 1][j + 1].on ? countOnBy++ : null
+            }
+          }
+
+
+          if (countOnBy === 3) {
+            cell.onNext = true
+          } else {
+            cell.onNext = false
+          }
+        }
+
+      }
+
       })
     })
 
     this.ctx.stroke()
+
+    this.universe.board.forEach((row, i) => {
+      row.forEach((cell, j) => {
+        if (this.isPlay) {
+          cell.on = cell.onNext
+        }
+
+      })
+    })
+
   }
 
   initClick() {
-    this.canvas.addEventListener('click', (evt) => {
-      const ceilX = Math.floor(evt.layerX / this.universe.cellWidth)
-      const ceilY = Math.floor(evt.layerY / this.universe.cellHeigt)
-      const currentCeil = this.universe.board[ceilY][ceilX]
+    let isMouseDown = false
 
-      if (currentCeil.on) {
-        currentCeil.on = false
-      } else {
-        currentCeil.on = true
+    let ceilX
+    let ceilY
+    let ceilDown
+
+    this.canvas.addEventListener('mousedown', (evt) => {
+      isMouseDown = true
+
+      ceilX = Math.floor(evt.layerX / this.universe.cellWidth)
+      ceilY = Math.floor(evt.layerY / this.universe.cellHeigt)
+
+      ceilDown = this.universe.board[ceilY][ceilX]
+    })
+
+    this.canvas.addEventListener('mouseup', (evt) => {
+      isMouseDown = false
+    })
+
+    this.canvas.addEventListener('mousemove', (evt) => {
+      if (isMouseDown) {
+        const currentCeilX = Math.floor(evt.layerX / this.universe.cellWidth)
+        const currentCeilY = Math.floor(evt.layerY / this.universe.cellHeigt)
+
+        const currentCeilDown = this.universe.board[currentCeilY][currentCeilX]
+        if (!ceilDown.on) {
+          currentCeilDown.on = true
+        } else {
+          currentCeilDown.on = false
+        }
       }
-
     })
   }
 
   start() {
+    this.isPlay = true
     window.requestAnimationFrame(this.update)
   }
 
   update() {
-    if (this.isPlay) {
-      this.renderUniverse()
-    }
+    this.renderUniverse()
     window.requestAnimationFrame(this.update)
   }
 }

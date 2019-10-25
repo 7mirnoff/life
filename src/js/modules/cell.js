@@ -6,5 +6,6 @@ export default class Cell {
     }
 
     this.on = false
+    this.onNext = false
   }
 }
