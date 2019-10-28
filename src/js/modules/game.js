@@ -1,12 +1,4 @@
 import * as PIXI from 'pixi.js'
-import {
-  initPixi
-} from '../pixi/engine'
-import {
-  loadTextures,
-  spritsheets,
-  textures
-} from '../pixi/textures';
 
 import getControlButtons from './buttons'
 import Universe from './universe'
@@ -22,6 +14,8 @@ export default class Game {
     this.buttons = getControlButtons()
     this.isPlay = false
 
+
+    this.start = this.start.bind(this)
     this.play = this.play.bind(this)
     this.pause = this.pause.bind(this)
     this.stop = this.stop.bind(this)
@@ -32,12 +26,14 @@ export default class Game {
     this.universe = new Universe(this.canvas)
 
     this.initClick()
+
+    this.initControls()
   }
 
-  async initTexture() {
-    await loadTextures()
-    this.textures = textures
-    this.spritsheets = spritsheets
+  start() {
+    console.log(1);
+    this.isPlay = true
+    window.requestAnimationFrame(this.update)
   }
 
   play() {
@@ -54,6 +50,7 @@ export default class Game {
   }
 
   initControls() {
+    this.buttons.start.addEventListener('click', this.start)
     this.buttons.play.addEventListener('click', this.play)
     this.buttons.pause.addEventListener('click', this.pause)
     this.buttons.stop.addEventListener('click', this.stop)
@@ -253,11 +250,6 @@ export default class Game {
         }
       }
     })
-  }
-
-  start() {
-    this.isPlay = true
-    window.requestAnimationFrame(this.update)
   }
 
   update() {

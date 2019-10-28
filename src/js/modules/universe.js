@@ -1,7 +1,7 @@
 import Cell from './cell'
 
-const AMT_HORIZ = 128
-const AMT_VERT = 72
+const AMT_HORIZ = 64
+const AMT_VERT = 36
 
 export default class Universe {
   constructor(canvas) {
