@@ -79,147 +79,93 @@ export default class Game {
 
         if (this.isPlay) {
 
-        if (cell.on) {
-          let countOnBy = 0
-
-          if (this.universe.board[i + 1]) {
-            this.universe.board[i + 1][j].on ? countOnBy++ : null
-          }
-
-          if (this.universe.board[i - 1]) {
-            this.universe.board[i - 1][j].on ? countOnBy++ : null
-          }
-
-          if (this.universe.board[i][j + 1]) {
-            this.universe.board[i][j + 1].on ? countOnBy++ : null
-          }
-
-          if (this.universe.board[i][j - 1]) {
-            this.universe.board[i][j - 1].on ? countOnBy++ : null
-          }
-
-
-
-
-
-          if (this.universe.board[i - 1]) {
-            if (this.universe.board[i - 1][j - 1]) {
-              this.universe.board[i - 1][j - 1].on ? countOnBy++ : null
+          if (cell.on) {
+            let countOnBy = 0
+            if (this.universe.board[i + 1]) {
+              this.universe.board[i + 1][j].on ? countOnBy++ : null
             }
-
-            if (this.universe.board[i - 1][j + 1]) {
-              this.universe.board[i - 1][j + 1].on ? countOnBy++ : null
+            if (this.universe.board[i - 1]) {
+              this.universe.board[i - 1][j].on ? countOnBy++ : null
             }
-
-          }
-
-          if (this.universe.board[i + 1]) {
-            if (this.universe.board[i + 1][j - 1]) {
-              this.universe.board[i + 1][j - 1].on ? countOnBy++ : null
+            if (this.universe.board[i][j + 1]) {
+              this.universe.board[i][j + 1].on ? countOnBy++ : null
             }
-
-            if (this.universe.board[i + 1][j + 1]) {
-              this.universe.board[i + 1][j + 1].on ? countOnBy++ : null
+            if (this.universe.board[i][j - 1]) {
+              this.universe.board[i][j - 1].on ? countOnBy++ : null
+            }
+            if (this.universe.board[i - 1]) {
+              if (this.universe.board[i - 1][j - 1]) {
+                this.universe.board[i - 1][j - 1].on ? countOnBy++ : null
+              }
+              if (this.universe.board[i - 1][j + 1]) {
+                this.universe.board[i - 1][j + 1].on ? countOnBy++ : null
+              }
+            }
+            if (this.universe.board[i + 1]) {
+              if (this.universe.board[i + 1][j - 1]) {
+                this.universe.board[i + 1][j - 1].on ? countOnBy++ : null
+              }
+              if (this.universe.board[i + 1][j + 1]) {
+                this.universe.board[i + 1][j + 1].on ? countOnBy++ : null
+              }
+            }
+            if ((countOnBy === 2) || (countOnBy === 3)) {
+              cell.onNext = true
+            } else {
+              cell.onNext = false
             }
           }
-
-          // if ((countOnBy === 2)) {
-          //   this.ctx.fillStyle = 'red'
-          // }
-
-          // if ((countOnBy === 3)) {
-          //   this.ctx.fillStyle = 'yellow'
-          // }
-
-          // if ((countOnBy === 4)) {
-          //   this.ctx.fillStyle = 'blue'
-          // }
-
-          // if ((countOnBy === 5)) {
-          //   this.ctx.fillStyle = 'green'
-          // }
-
-
-
-          // if ((countOnBy === 2) || (countOnBy === 3) || (countOnBy === 4) && (Math.sin(performance.now() / 1000) > 0.2)) {
-          if ((countOnBy === 2) || (countOnBy === 3)) {
-            cell.onNext = true
-          } else {
-            cell.onNext = false
+          if (!cell.on) {
+            let countOnBy = 0
+            if (this.universe.board[i + 1]) {
+              this.universe.board[i + 1][j].on ? countOnBy++ : null
+            }
+            if (this.universe.board[i - 1]) {
+              this.universe.board[i - 1][j].on ? countOnBy++ : null
+            }
+            if (this.universe.board[i][j + 1]) {
+              this.universe.board[i][j + 1].on ? countOnBy++ : null
+            }
+            if (this.universe.board[i][j - 1]) {
+              this.universe.board[i][j - 1].on ? countOnBy++ : null
+            }
+            if (this.universe.board[i - 1]) {
+              if (this.universe.board[i - 1][j - 1]) {
+                this.universe.board[i - 1][j - 1].on ? countOnBy++ : null
+              }
+              if (this.universe.board[i - 1][j + 1]) {
+                this.universe.board[i - 1][j + 1].on ? countOnBy++ : null
+              }
+            }
+            if (this.universe.board[i + 1]) {
+              if (this.universe.board[i + 1][j - 1]) {
+                this.universe.board[i + 1][j - 1].on ? countOnBy++ : null
+              }
+              if (this.universe.board[i + 1][j + 1]) {
+                this.universe.board[i + 1][j + 1].on ? countOnBy++ : null
+              }
+            }
+            if (countOnBy === 3) {
+              cell.onNext = true
+            } else {
+              cell.onNext = false
+            }
           }
         }
-
-
-        if (!cell.on) {
-          let countOnBy = 0
-
-          if (this.universe.board[i + 1]) {
-            this.universe.board[i + 1][j].on ? countOnBy++ : null
-          }
-
-          if (this.universe.board[i - 1]) {
-            this.universe.board[i - 1][j].on ? countOnBy++ : null
-          }
-
-          if (this.universe.board[i][j + 1]) {
-            this.universe.board[i][j + 1].on ? countOnBy++ : null
-          }
-
-          if (this.universe.board[i][j - 1]) {
-            this.universe.board[i][j - 1].on ? countOnBy++ : null
-          }
-
-
-          if (this.universe.board[i - 1]) {
-            if (this.universe.board[i - 1][j - 1]) {
-              this.universe.board[i - 1][j - 1].on ? countOnBy++ : null
-            }
-
-            if (this.universe.board[i - 1][j + 1]) {
-              this.universe.board[i - 1][j + 1].on ? countOnBy++ : null
-            }
-
-          }
-
-          if (this.universe.board[i + 1]) {
-            if (this.universe.board[i + 1][j - 1]) {
-              this.universe.board[i + 1][j - 1].on ? countOnBy++ : null
-            }
-
-            if (this.universe.board[i + 1][j + 1]) {
-              this.universe.board[i + 1][j + 1].on ? countOnBy++ : null
-            }
-          }
-
-
-          if (countOnBy === 3) {
-            cell.onNext = true
-          } else {
-            cell.onNext = false
-          }
-        }
-
-      }
-
       })
     })
-
     this.ctx.stroke()
-
     this.universe.board.forEach((row, i) => {
       row.forEach((cell, j) => {
         if (this.isPlay) {
           cell.on = cell.onNext
         }
-
       })
     })
-
   }
 
   initClick() {
     let isMouseDown = false
-
     let ceilX
     let ceilY
     let ceilDown
