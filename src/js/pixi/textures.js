@@ -1,11 +1,12 @@
-
+/* global Promise */
 import * as PIXI from 'pixi.js'
 
-const textures_list = [
+const texturesList = [
   // { name: 'rocket',
   //   path: require('../../assets/img/rocket.png')
   // },
-  { name: 'meteor',
+  {
+    name: 'meteor',
     path: require('../../assets/img/meteor.png')
   }
   // { name: 'boost',
@@ -28,19 +29,18 @@ const textures_list = [
 const spritsheets = {}
 const textures = {}
 
-
 const loadTextures = async () => {
   const loader = PIXI.Loader.shared
 
   // Добавление текстур в лоадер
-  for (const texture of textures_list) {
+  for (const texture of texturesList) {
     loader.add(texture.name, texture.path)
   }
 
   // Начать загрузку и ждать пока все не загрузится
-  return await new Promise ((resolve) => {
+  return await new Promise (resolve => {
     loader.load((loader, resources) => {
-      for (const texture of textures_list) {
+      for (const texture of texturesList) {
         const t = resources[texture.name].texture
         spritsheets[texture.name] = new PIXI.Sprite(t)
         textures[texture.name] = t
