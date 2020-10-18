@@ -1,10 +1,10 @@
-import * as PIXI from 'pixi.js'
+// import * as PIXI from 'pixi.js'
 
 import getControlButtons from './buttons'
 import Universe from './universe'
 
 export default class Game {
-  constructor() {
+  constructor () {
     // this.pixi = initPixi()
     this.canvas = document.getElementById('canvas')
     this.ctx = this.canvas.getContext('2d')
@@ -13,7 +13,6 @@ export default class Game {
 
     this.buttons = getControlButtons()
     this.isPlay = false
-
 
     this.start = this.start.bind(this)
     this.play = this.play.bind(this)
@@ -30,40 +29,39 @@ export default class Game {
     this.initControls()
   }
 
-  start() {
-    console.log(1);
+  start () {
+    console.log(1)
     this.isPlay = true
     window.requestAnimationFrame(this.update)
   }
 
-  play() {
+  play () {
     this.isPlay = true
   }
 
-  pause() {
+  pause () {
     this.isPlay = false
   }
 
-  stop() {
+  stop () {
     this.isPlay = false
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
   }
 
-  initControls() {
+  initControls () {
     this.buttons.start.addEventListener('click', this.start)
     this.buttons.play.addEventListener('click', this.play)
     this.buttons.pause.addEventListener('click', this.pause)
     this.buttons.stop.addEventListener('click', this.stop)
   }
 
-  initCanvas() {
+  initCanvas () {
     this.canvas.width = this.canvas.offsetWidth
     this.canvas.height = this.canvas.offsetHeight
   }
 
-  renderUniverse() { //TODO: остановился тут
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
+  renderUniverse () { // TODO: остановился тут
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
     this.ctx.lineWidth = '2'
     this.ctx.strokeStyle = 'black'
 
@@ -78,35 +76,34 @@ export default class Game {
         }
 
         if (this.isPlay) {
-
           if (cell.on) {
             let countOnBy = 0
             if (this.universe.board[i + 1]) {
-              this.universe.board[i + 1][j].on ? countOnBy++ : null
+              this.universe.board[i + 1][j].on && countOnBy++
             }
             if (this.universe.board[i - 1]) {
-              this.universe.board[i - 1][j].on ? countOnBy++ : null
+              this.universe.board[i - 1][j].on && countOnBy++
             }
             if (this.universe.board[i][j + 1]) {
-              this.universe.board[i][j + 1].on ? countOnBy++ : null
+              this.universe.board[i][j + 1].on && countOnBy++
             }
             if (this.universe.board[i][j - 1]) {
-              this.universe.board[i][j - 1].on ? countOnBy++ : null
+              this.universe.board[i][j - 1].on && countOnBy++
             }
             if (this.universe.board[i - 1]) {
               if (this.universe.board[i - 1][j - 1]) {
-                this.universe.board[i - 1][j - 1].on ? countOnBy++ : null
+                this.universe.board[i - 1][j - 1].on && countOnBy++
               }
               if (this.universe.board[i - 1][j + 1]) {
-                this.universe.board[i - 1][j + 1].on ? countOnBy++ : null
+                this.universe.board[i - 1][j + 1].on && countOnBy++
               }
             }
             if (this.universe.board[i + 1]) {
               if (this.universe.board[i + 1][j - 1]) {
-                this.universe.board[i + 1][j - 1].on ? countOnBy++ : null
+                this.universe.board[i + 1][j - 1].on && countOnBy++
               }
               if (this.universe.board[i + 1][j + 1]) {
-                this.universe.board[i + 1][j + 1].on ? countOnBy++ : null
+                this.universe.board[i + 1][j + 1].on && countOnBy++
               }
             }
             if ((countOnBy === 2) || (countOnBy === 3)) {
@@ -118,31 +115,31 @@ export default class Game {
           if (!cell.on) {
             let countOnBy = 0
             if (this.universe.board[i + 1]) {
-              this.universe.board[i + 1][j].on ? countOnBy++ : null
+              this.universe.board[i + 1][j].on && countOnBy++
             }
             if (this.universe.board[i - 1]) {
-              this.universe.board[i - 1][j].on ? countOnBy++ : null
+              this.universe.board[i - 1][j].on && countOnBy++
             }
             if (this.universe.board[i][j + 1]) {
-              this.universe.board[i][j + 1].on ? countOnBy++ : null
+              this.universe.board[i][j + 1].on && countOnBy++
             }
             if (this.universe.board[i][j - 1]) {
-              this.universe.board[i][j - 1].on ? countOnBy++ : null
+              this.universe.board[i][j - 1].on && countOnBy++
             }
             if (this.universe.board[i - 1]) {
               if (this.universe.board[i - 1][j - 1]) {
-                this.universe.board[i - 1][j - 1].on ? countOnBy++ : null
+                this.universe.board[i - 1][j - 1].on && countOnBy++
               }
               if (this.universe.board[i - 1][j + 1]) {
-                this.universe.board[i - 1][j + 1].on ? countOnBy++ : null
+                this.universe.board[i - 1][j + 1].on && countOnBy++
               }
             }
             if (this.universe.board[i + 1]) {
               if (this.universe.board[i + 1][j - 1]) {
-                this.universe.board[i + 1][j - 1].on ? countOnBy++ : null
+                this.universe.board[i + 1][j - 1].on && countOnBy++
               }
               if (this.universe.board[i + 1][j + 1]) {
-                this.universe.board[i + 1][j + 1].on ? countOnBy++ : null
+                this.universe.board[i + 1][j + 1].on && countOnBy++
               }
             }
             if (countOnBy === 3) {
@@ -164,7 +161,7 @@ export default class Game {
     })
   }
 
-  initClick() {
+  initClick () {
     let isMouseDown = false
     let ceilX
     let ceilY
@@ -198,7 +195,7 @@ export default class Game {
     })
   }
 
-  update() {
+  update () {
     this.renderUniverse()
     window.requestAnimationFrame(this.update)
   }

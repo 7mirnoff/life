@@ -4,7 +4,7 @@ const AMT_HORIZ = 64
 const AMT_VERT = 36
 
 export default class Universe {
-  constructor(canvas) {
+  constructor (canvas) {
     this.rendererWidth = canvas.width
     this.rendererHeight = canvas.height
     this.amtHoriz = AMT_HORIZ
@@ -14,8 +14,8 @@ export default class Universe {
     this.board = this.createBoard()
   }
 
-  createBoard() {
-    var array = [];
+  createBoard () {
+    var array = []
     for (let i = 0; i < this.amtVert; i++) {
       array[i] = []
       for (let j = 0; j < this.amtHoriz; j++) {

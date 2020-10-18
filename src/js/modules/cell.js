@@ -1,8 +1,8 @@
 export default class Cell {
-  constructor(x, y) {
+  constructor (x, y) {
     this.figure = {
-      x: x,
-      y: y
+      x,
+      y
     }
 
     this.on = false
